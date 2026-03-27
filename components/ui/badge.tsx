@@ -1,12 +1,12 @@
-import {type VariantProps, cva} from "class-variance-authority";
-import {View} from "react-native";
+import { type VariantProps, cva } from "class-variance-authority";
+import { View } from "react-native";
 import * as Slot from "@/components/primitives/slot";
-import type {SlottableViewProps} from "@/components/primitives/types";
-import {TextClassContext} from "@/components/ui/text";
-import {cn} from "@/lib/utils";
+import type { SlottableViewProps } from "@/components/primitives/types";
+import { TextClassContext } from "@/components/ui/text";
+import { cn } from "@/lib/utils";
 
 const badgeVariants = cva(
-  "web:inline-flex items-center rounded-full border border-border px-2.5 py-0.5 web:transition-colors web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2",
+  "web:inline-flex items-center rounded-full border border-border web:transition-colors web:focus:outline-none web:focus:ring-2 web:focus:ring-ring web:focus:ring-offset-2",
   {
     variants: {
       variant: {
@@ -18,17 +18,25 @@ const badgeVariants = cva(
           "border-transparent bg-destructive web:hover:opacity-80 active:opacity-80",
         outline: "text-foreground",
       },
+      size: {
+        xs: "px-1",
+        default: "px-2.5 py-0.5",
+        sm: "px-2 py-0.5",
+        lg: "px-3 py-1",
+      },
     },
+
     defaultVariants: {
       variant: "default",
+      size: "default",
     },
   },
 );
 
-const badgeTextVariants = cva("text-xs font-semibold ", {
+const badgeTextVariants = cva("text-xs font-semibold text-white", {
   variants: {
     variant: {
-      default: "text-primary-foreground",
+      default: "text-white",
       secondary: "text-secondary-foreground",
       destructive: "text-destructive-foreground",
       outline: "text-foreground",
@@ -41,17 +49,17 @@ const badgeTextVariants = cva("text-xs font-semibold ", {
 
 type BadgeProps = SlottableViewProps & VariantProps<typeof badgeVariants>;
 
-function Badge({className, variant, asChild, ...props}: BadgeProps) {
+function Badge({ className, variant, asChild, size, ...props }: BadgeProps) {
   const Component = asChild ? Slot.View : View;
   return (
-    <TextClassContext.Provider value={badgeTextVariants({variant})}>
+    <TextClassContext.Provider value={badgeTextVariants({ variant })}>
       <Component
-        className={cn(badgeVariants({variant}), className)}
+        className={cn(badgeVariants({ variant, size }), className)}
         {...props}
       />
     </TextClassContext.Provider>
   );
 }
 
-export {Badge, badgeTextVariants, badgeVariants};
-export type {BadgeProps};
+export { Badge, badgeTextVariants, badgeVariants };
+export type { BadgeProps };

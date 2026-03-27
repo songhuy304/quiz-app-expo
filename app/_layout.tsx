@@ -50,14 +50,14 @@ export default function RootLayout() {
         <BottomSheetModalProvider>
           <Stack>
             <Stack.Screen name="(tabs)" options={{ title: "Habits", headerShown: false }} />
-            <Stack.Screen options={{
-              headerShadowVisible: false,
-            }} name="habits/archive" />
-            <Stack.Screen options={{
-              headerShadowVisible: false,
-            }} name="habits/[id]" />
             <Stack.Screen
               name="auth/index"
+              options={{
+                headerShown: false
+              }}
+            />
+            <Stack.Screen
+              name="quiz/index"
               options={{
                 headerShown: false
               }}

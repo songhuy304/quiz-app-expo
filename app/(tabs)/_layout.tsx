@@ -1,12 +1,13 @@
 import { Tabs } from 'expo-router';
 import { View, Text } from 'react-native';
 import { Home, LayoutGrid, Plus, PlusCircleIcon, User } from 'lucide-react-native';
+import { Logo } from '@/components/logo';
 
 const PRIMARY = 'hsl(250, 100%, 64%)';
 function JoinIcon({ focused }: { focused: boolean }) {
   return (
-    <View className="w-12 h-12 rounded-full bg-violet-500 items-center justify-center -mt-2 shadow-md shadow-violet-400">
-      <Text className="text-white text-xl font-bold">Q</Text>
+    <View className="w-12 h-12 rounded-full bg-primary items-center justify-center -mt-2 shadow-md shadow-primary">
+      <Logo width={20} height={20} color="white" />
     </View>
   );
 }
@@ -79,7 +80,6 @@ export default function TabLayout() {
         }}
       />
 
-      {/* Create */}
       <Tabs.Screen
         name="create"
         options={{
